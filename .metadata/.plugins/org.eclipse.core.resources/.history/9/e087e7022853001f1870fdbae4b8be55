@@ -1,0 +1,10 @@
+package org.durgesh.entity;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class Designation {
+	private long id;
+	private String designation;
+
+}

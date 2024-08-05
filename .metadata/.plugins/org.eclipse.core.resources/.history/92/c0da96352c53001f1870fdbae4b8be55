@@ -1,0 +1,27 @@
+package org.durgesh.service;
+
+import org.durgesh.entity.Designation;
+import org.durgesh.entity.Employee;
+import org.durgesh.repository.DesignationRepository;
+import org.durgesh.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class EmployeeService {
+	@Autowired
+	private EmployeeRepository employeeRepository;
+
+	@Autowired
+	private DesignationRepository designationRepository;
+
+	public Employee saveEmployee(Employee employee) {
+		Designation designation = designationRepository.findById(employee.getDesignationId()).orElse(null);
+		if (designation != null) {
+			employee.setDesignation(designation.getDesignation());
+			return employeeRepository.save(employee);
+		}
+		return null;
+	}
+
+}
